@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/email"
+            android:hint="이메일 입력" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="140dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/passwd"
+            android:hint="비밀번호 입력" app:layout_constraintStart_toStartOf="@+id/email" android:layout_marginTop="25dp"
+            android:layout_marginStart="1dp"
+            app:layout_constraintTop_toBottomOf="@+id/email"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/passwd_check"
+            android:hint="비밀번호 확인" android:layout_marginTop="29dp" app:layout_constraintTop_toBottomOf="@+id/passwd"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="@+id/passwd"/>
+    <Button
+            android:text="가입완료"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/join" android:layout_marginTop="272dp"
+            android:layout_marginBottom="271dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/email" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
