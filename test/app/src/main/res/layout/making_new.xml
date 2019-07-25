@@ -11,33 +11,57 @@
             android:inputType="textEmailAddress"
             android:ems="10"
             android:id="@+id/email"
-            android:hint="이메일 입력" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="140dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:hint="이메일 입력"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="140dp" app:layout_constraintEnd_toEndOf="parent"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/passwd"
-            android:hint="비밀번호 입력" app:layout_constraintStart_toStartOf="@+id/email" android:layout_marginTop="25dp"
-            android:layout_marginStart="1dp"
-            app:layout_constraintTop_toBottomOf="@+id/email"/>
+            android:hint="비밀번호 입력"
+            app:layout_constraintStart_toStartOf="@+id/email" android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/check_email"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
             android:id="@+id/passwd_check"
-            android:hint="비밀번호 확인" android:layout_marginTop="29dp" app:layout_constraintTop_toBottomOf="@+id/passwd"
-            android:layout_marginEnd="1dp"
-            app:layout_constraintEnd_toEndOf="@+id/passwd"/>
+            android:hint="비밀번호 확인"
+            app:layout_constraintStart_toStartOf="@+id/passwd" android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/passwd"/>
     <Button
             android:text="가입완료"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/join" android:layout_marginTop="272dp"
-            android:layout_marginBottom="271dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/email" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:id="@+id/join"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/nickname" app:layout_constraintEnd_toEndOf="parent"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/age"
+            android:hint="생년월일 입력"
+            app:layout_constraintStart_toStartOf="@+id/passwd_check" android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@+id/passwd_check"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/nickname"
+            android:hint="nickname"
+            app:layout_constraintStart_toStartOf="@+id/age" android:layout_marginTop="21dp"
+            app:layout_constraintTop_toBottomOf="@+id/age"/>
+    <Button
+            android:text="중복 확인"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/check_email"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="9dp"
+            app:layout_constraintTop_toBottomOf="@+id/email" app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

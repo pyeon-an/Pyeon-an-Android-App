@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
+
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,21 +35,21 @@ class MainActivity : AppCompatActivity() {
             if (email.text.toString().length == 0 || password.text.toString().length == 0){
                 Toast.makeText(this, "email 혹은 password를 반드시 입력하세요.", Toast.LENGTH_SHORT).show()
             } else {
-                auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
-                    .addOnCompleteListener(this) { task ->
+                auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success")
-                            Toast.makeText(baseContext, "로그인 성공",
-                                Toast.LENGTH_SHORT).show()
-                    //        val user = auth.currentUser
-                    //        updateUI(user)
+                            Toast.makeText(baseContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, menual::class.java)
+                            startActivity(intent)
+                            val user = auth.currentUser
+                            updateUI(user)
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
-                            Toast.makeText(baseContext, "로그인 실패",
-                                Toast.LENGTH_SHORT).show()
-                    //        updateUI(null)
+                            Toast.makeText(baseContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+
+                            updateUI(null)
                         }
 
                         // ...
@@ -74,8 +75,9 @@ class MainActivity : AppCompatActivity() {
             bt_login.isEnabled = true
             bt_create.isEnabled = true
         }*/
+
     }
-/*
+
     override fun onResume() {
         super.onResume()
         val currentUser = auth?.currentUser
@@ -89,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         val currentUser = auth?.currentUser
         updateUI(currentUser) //이건 원하는대로 사용자 설정해 주는 부분인듯 하다.
     }
-
+/*
     fun updateUI(cUser : FirebaseUser? = null){
         if(cUser != null) {
             tv_message.setText("로그인 되었습니다.")
@@ -113,5 +115,28 @@ class MainActivity : AppCompatActivity() {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }*/
+    fun updateUI(cUser : FirebaseUser? = null){
+        if(cUser != null) {
+     //       tv_message.setText("로그인 되었습니다.")
+            //로그인 버튼과 기타 등등을 사용할 수 없게 함(일괄 묶어서 처리 하는 방법?)
+            login.isEnabled = true
+            join.isEnabled = true
+          //  bt_logout.isEnabled = true
+        } else {
+       //     tv_message.setText("로그인이 필요합니다..")
+        //    bt_logout.isEnabled = false
+        }
+        email.setText("")
+        passwd.setText("")
+        hideKeyboard(email)
+         //Toast.makeText(this, "유저: "+cUser.toString(), Toast.LENGTH_SHORT).show()
+    }
+    private fun hideKeyboard(view: View) {
+        view?.apply {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
 }
 
