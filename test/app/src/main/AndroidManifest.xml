@@ -9,11 +9,15 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".menual">
+        <activity android:name=".Search_pc_cafeActivity">
+        </activity>
+        <activity android:name=".My_infoActivity">
+        </activity>
+        <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".join_new">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".menual">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

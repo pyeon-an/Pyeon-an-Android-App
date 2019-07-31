@@ -93,6 +93,7 @@ class join_new : AppCompatActivity() {
                 myRef.child("나이").setValue(age.text.toString())
                 myRef.child("이메일").setValue(email.text.toString())
                 myRef.child("닉네임").setValue(nickname.text.toString())
+                myRef.child("비밀번호").setValue(password.text.toString())
                 Toast.makeText(baseContext, "가입 완료", Toast.LENGTH_SHORT).show()
                 email_checking=1
                 finish()
