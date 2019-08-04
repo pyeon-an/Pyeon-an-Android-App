@@ -9,6 +9,20 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+        <activity android:name=".menual">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_kwangwoon_univActivity.seat2_3pop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_kwangwoon_univActivity.pc_3pop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_kwangwoon_univActivity.seat1_3pop_kwangwoon_univActivity">
+        </activity>
         <activity android:name=".Search_pc_cafeActivity">
         </activity>
         <activity android:name=".My_infoActivity">
@@ -16,13 +30,6 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".join_new">
-        </activity>
-        <activity android:name=".menual">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 

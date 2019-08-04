@@ -25,6 +25,7 @@ class Search_pc_cafeActivity : AppCompatActivity() {
 
         val pc_cafe = findViewById<EditText>(R.id.pc_cafe)
         val local = findViewById<EditText>(R.id.local)
+        var check=0
 
         searching.setOnClickListener {
        //     Toast.makeText(this, "aaaaaaa", Toast.LENGTH_SHORT).show()
@@ -51,6 +52,7 @@ class Search_pc_cafeActivity : AppCompatActivity() {
                                     if(pc_info.toString().equals("null")) {
                                         pc_cafe_sel.setText("등록된 지점이 아닙니다.")
                                     }else{
+                                        check=1
                                         pc_cafe_sel.setText(pc_cafe.text.toString() + "(" + local.text.toString() + ")")
                                     }
                                     //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
@@ -67,6 +69,9 @@ class Search_pc_cafeActivity : AppCompatActivity() {
         select.setOnClickListener {
             if(pc_cafe.text.toString().equals("") || local.text.toString().equals("")){
                 Toast.makeText(this, "PC카페를 찾아주세요.", Toast.LENGTH_SHORT).show()
+
+            } else if(check==0){
+                Toast.makeText(this, "PC카페를 먼저 찾아주세요.", Toast.LENGTH_SHORT).show()
 
             } else {
                 val memberRef = database.getReference("member").child(auth.currentUser?.uid.toString())

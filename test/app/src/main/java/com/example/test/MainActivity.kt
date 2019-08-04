@@ -16,12 +16,26 @@ import com.google.firebase.database.*
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.email
-import kotlinx.android.synthetic.main.my_info.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private val TAG : String = "MainActivity"
+    var time3: Long = 0
+
+    override fun onBackPressed() {
+        val time1 = System.currentTimeMillis()
+        val time2 = time1 - time3
+        if (time2 in 0..2000) {
+            finishAffinity()
+            System.runFinalization()
+            System.exit(0)
+        }
+        else {
+            time3 = time1
+            Toast.makeText(applicationContext, "한번 더 누르시면 종료됩니다.",Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.passwd)
         var auto_email : String
         var auto_password : String
-        user.setText(auth.currentUser?.email.toString())
+        use.setText(auth.currentUser?.email.toString())
         //로그인
         auto_login.setOnClickListener {
             if (auto_login.isChecked() == true) {
@@ -102,7 +116,8 @@ class MainActivity : AppCompatActivity() {
                       //      startActivity(intent)
                             val user = auth.currentUser
                             updateUI(user)
-                            finish()
+                            val intent = Intent(this, menual::class.java)
+                            startActivity(intent)
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)

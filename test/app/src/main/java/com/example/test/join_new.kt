@@ -94,6 +94,8 @@ class join_new : AppCompatActivity() {
                 myRef.child("이메일").setValue(email.text.toString())
                 myRef.child("닉네임").setValue(nickname.text.toString())
                 myRef.child("비밀번호").setValue(password.text.toString())
+                myRef.child("PCcafe").setValue("설정한 PCcafe가 없습니다.")
+                myRef.child("지점").setValue("")
                 Toast.makeText(baseContext, "가입 완료", Toast.LENGTH_SHORT).show()
                 email_checking=1
                 finish()
