@@ -25,6 +25,24 @@ class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
         val myRef : DatabaseReference = database.getReference("PCcafe").child("3POP").child("광운대").child("1")
         var check=0
 
+        val memberRef: DatabaseReference = database.getReference("member")
+        var user = 0
+        memberRef.child(auth.currentUser?.uid.toString()).child("좌석번호")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    val value = p0?.value
+                    if ("$value".equals("") == true) {
+                        user = 1
+                    } else {
+                        user = 0
+                    }
+                }
+            })
+
         myRef.child("cpu").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
@@ -63,28 +81,36 @@ class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
         }
 
         reservation.setOnClickListener {
-            myRef.child("사용").addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
+            if (user == 1) {
+                myRef.child("사용").addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
 
-                }
-                override fun onDataChange(p0: DataSnapshot) {
-                    //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
-                    val value = p0?.value
-
-                    if(value!!.equals("X") && check==0){
-                        myRef.child("uid").setValue(auth.currentUser?.uid.toString())
-                        myRef.child("사용").setValue("O")
-                        finish()
-                        val memberRef : DatabaseReference = database.getReference("member")
-                        memberRef.child(auth.currentUser?.uid.toString()).child("좌석번호").setValue("1")
-                        Toast.makeText(baseContext, "예약되었습니다.", Toast.LENGTH_SHORT).show()
-                        check=1
-                    } else if(check==0) {
-                        Toast.makeText(baseContext, "사용 중인 자리입니다.", Toast.LENGTH_SHORT).show()
-                        finish()
                     }
-                }
-            })
+
+                    override fun onDataChange(p0: DataSnapshot) {
+                        //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
+                        val value = p0?.value
+
+                        if (value!!.equals("X") && check == 0 && user == 1) {
+                            myRef.child("uid").setValue(auth.currentUser?.uid.toString())
+                            myRef.child("사용").setValue("O")
+                            memberRef.child(auth.currentUser?.uid.toString()).child("좌석번호").setValue("1")
+                            Toast.makeText(baseContext, "예약되었습니다.", Toast.LENGTH_SHORT).show()
+                            check = 1
+                            finish()
+                        } else if (check == 0) {
+                            Toast.makeText(baseContext, "사용 중인 자리입니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        } else{
+                            Toast.makeText(baseContext, "ggg.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+                    }
+                })
+            } else {
+                Toast.makeText(baseContext, "사용중인 자리가 있습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 }

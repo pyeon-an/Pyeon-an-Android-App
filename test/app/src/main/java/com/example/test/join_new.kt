@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -33,37 +34,25 @@ class join_new : AppCompatActivity() {
         var email_checking=1
 
         check_email.setOnClickListener {
-            auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success")
+            auth.fetchSignInMethodsForEmail(email.text.toString())
+                .addOnSuccessListener { result ->
+                    val signInMethods = result.signInMethods
+                    if (signInMethods!!.contains(EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD)) {
+                        Toast.makeText(baseContext, "이미 사용중인 이메일입니다.", Toast.LENGTH_SHORT).show()
+                        email_checking=1
+                        // User can sign in with email/password
+                    } else if (signInMethods.contains(EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD)) {
+                        // User can sign in with email/link
+                    }else{
                         Toast.makeText(baseContext, "사용가능한 이메일 입니다.", Toast.LENGTH_SHORT).show()
-                        //    val user = auth.currentUser
-                        //updateUI(user)
-                        // 아니면 액티비티를 닫아 버린다.
                         email_checking=0
-
-                        //     overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit)
-                    }  else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        if(password.text.toString().length<6) {
-                            Toast.makeText(baseContext, "비밀번호는 6자리 이상 입력해야합니다.", Toast.LENGTH_SHORT).show()
-                            password?.setText("")
-                            password_check?.setText("")
-                            email.requestFocus()
-                        }else {
-                            Toast.makeText(baseContext, "이미 가입된 이메일입니다.", Toast.LENGTH_SHORT).show()
-                            //updateUI(null)
-                            //입력필드 초기화
-                            email?.setText("")
-                            password?.setText("")
-                            password_check?.setText("")
-                            email.requestFocus()
-                        }
                     }
                 }
+                .addOnFailureListener { exception ->
+                    Log.e(TAG, "Error getting sign in methods for user", exception)
+                    Toast.makeText(baseContext, email.text.toString(), Toast.LENGTH_SHORT).show()
+                }
+
         }
         //새로운 계정을 생성한다.
         join.setOnClickListener {
@@ -73,9 +62,7 @@ class join_new : AppCompatActivity() {
                 Toast.makeText(this, "email 혹은 password를 반드시 입력하세요.", Toast.LENGTH_SHORT).show()
             } else if(password.text.toString().equals(password_check.text.toString())==false){
                 Toast.makeText(baseContext, "비밀번호가 다릅니다.\n다시 입력해주세요.", Toast.LENGTH_SHORT).show()
-                //updateUI(null)
-                //입력필드 초기화
-                //   email?.setText("")
+
                 password?.setText("")
                 password_check?.setText("")
                 email.requestFocus()
@@ -84,28 +71,45 @@ class join_new : AppCompatActivity() {
                 Toast.makeText(baseContext, "이메일 중복 확인을 해주세요.", Toast.LENGTH_SHORT).show()
 
             }else {
-             /*   val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-                val myRef : DatabaseReference = database.getReference(email.text.toString())
-                myRef.setValue(age.text.toString())*/
 
-                val database = FirebaseDatabase.getInstance()
-                val myRef = database.getReference("member").child(auth.currentUser?.uid.toString())
-                myRef.child("나이").setValue(age.text.toString())
-                myRef.child("이메일").setValue(email.text.toString())
-                myRef.child("닉네임").setValue(nickname.text.toString())
-                myRef.child("비밀번호").setValue(password.text.toString())
-                myRef.child("PCcafe").setValue("설정한 PCcafe가 없습니다.")
-                myRef.child("지점").setValue("")
-                Toast.makeText(baseContext, "가입 완료", Toast.LENGTH_SHORT).show()
-                email_checking=1
-                finish()
+                auth.createUserWithEmailAndPassword(email.text.toString(), password.text.toString())
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success")
+
+                            val database = FirebaseDatabase.getInstance()
+                            val myRef = database.getReference("member").child(auth.currentUser?.uid.toString())
+                            myRef.child("나이").setValue(age.text.toString())
+                            myRef.child("이메일").setValue(email.text.toString())
+                            myRef.child("닉네임").setValue(nickname.text.toString())
+                            myRef.child("비밀번호").setValue(password.text.toString())
+                            myRef.child("PCcafe").setValue("설정한 PCcafe가 없습니다.")
+                            myRef.child("지점").setValue("")
+                            Toast.makeText(baseContext, "가입 완료", Toast.LENGTH_SHORT).show()
+                            email_checking=1
+                            finish()
+                        }  else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                            if(password.text.toString().length<6) {
+                                Toast.makeText(baseContext, "비밀번호는 6자리 이상 입력해야합니다.", Toast.LENGTH_SHORT).show()
+                                password?.setText("")
+                                password_check?.setText("")
+                                email.requestFocus()
+                            }else {
+                                Toast.makeText(baseContext, "이미 가입된 이메일입니다.", Toast.LENGTH_SHORT).show()
+                                //updateUI(null)
+                                //입력필드 초기화
+                                email?.setText("")
+                                password?.setText("")
+                                password_check?.setText("")
+                                email.requestFocus()
+                            }
+                        }
+                    }
+
             }
         }
-
-        /*
-        bt_cancel.setOnClickListener {
-            finish()
-            overridePendingTransition(R.anim.slide_enter, R.anim.slide_exit)
-        }*/
     }
 }

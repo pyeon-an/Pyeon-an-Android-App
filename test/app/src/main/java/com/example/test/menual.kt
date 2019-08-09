@@ -72,6 +72,11 @@ class menual : AppCompatActivity() {
             startActivity(intent)
         }
 
+        list.setOnClickListener {
+            val intent = Intent(this, My_pc_listActivity::class.java)
+            startActivity(intent)
+        }
+
         PC_cafe.setOnClickListener {
             val intent = Intent(this, Search_pc_cafeActivity::class.java)
             startActivity(intent)
@@ -115,7 +120,6 @@ class menual : AppCompatActivity() {
                 pcRef.child(pc_check.toString()).child("uid").setValue("")
                 myRef.child(myUid).child("좌석번호").setValue("")
                 Toast.makeText(baseContext, "pc 로그아웃", Toast.LENGTH_SHORT).show()
-
             }
             a.setText(pc_check.toString())
         }

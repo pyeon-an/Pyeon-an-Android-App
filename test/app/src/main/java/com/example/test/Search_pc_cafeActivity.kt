@@ -82,5 +82,14 @@ class Search_pc_cafeActivity : AppCompatActivity() {
             }
         }
 
+        list.setOnClickListener {
+            if(check!=1){
+                Toast.makeText(this, "PC카페를 먼저 설정해주세요.", Toast.LENGTH_SHORT).show()
+            } else{
+                val memberRef = database.getReference("member").child(auth.currentUser?.uid.toString())
+                memberRef.child("즐겨찾기").child(pc_cafe.text.toString()+" "+local.text.toString()).setValue(pc_cafe.text.toString()+" "+local.text.toString())
+                Toast.makeText(this, "PC카페가 즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
