@@ -44,6 +44,16 @@ class menual : AppCompatActivity() {
 
         setContentView(R.layout.menual_page)
 
+        //툴바 추가
+        val actionBar = supportActionBar
+
+        actionBar!!.title = "Home"
+
+       // actionBar.setDisplayHomeAsUpEnabled(true)
+        //actionBar.setDisplayHomeAsUpEnabled(true)
+        // 툴바 추가 완료
+
+
         val database : FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef : DatabaseReference = database.getReference("member")
 
@@ -70,16 +80,19 @@ class menual : AppCompatActivity() {
         info.setOnClickListener {
             val intent = Intent(this, My_infoActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         list.setOnClickListener {
             val intent = Intent(this, My_pc_listActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         PC_cafe.setOnClickListener {
             val intent = Intent(this, Search_pc_cafeActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         seat.setOnClickListener {
@@ -87,6 +100,7 @@ class menual : AppCompatActivity() {
                 if(local.text.toString().equals("광운대")) {
                     val intent = Intent(this, pc_3pop_kwangwoon_univActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
                 }
             }
@@ -130,7 +144,11 @@ class menual : AppCompatActivity() {
             Toast.makeText(baseContext, "로그아웃 성공", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
     }
+
+
+
 }
 

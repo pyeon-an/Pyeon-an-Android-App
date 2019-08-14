@@ -29,6 +29,16 @@ class My_pc_listActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_pc_list)
+
+        val actionBar = supportActionBar
+
+        actionBar!!.title = "즐겨찾기"
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        // 툴바 추가 완료
+
+
         auth = FirebaseAuth.getInstance()
         val database: FirebaseDatabase = FirebaseDatabase.getInstance()
 
@@ -65,8 +75,16 @@ class My_pc_listActivity : AppCompatActivity() {
             adapter?.notifyDataSetChanged()
             Toast.makeText(applicationContext, "PC cafe가 설정되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        // return super.onSupportNavigateUp()
+        onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish()
+        return true
     }
 
 }

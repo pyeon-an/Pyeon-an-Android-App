@@ -26,13 +26,6 @@
             android:id="@+id/textView3"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintBaseline_toBaselineOf="@+id/age"/>
-    <Button
-            android:text="뒤로"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/back"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="155dp"/>
     <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
