@@ -41,6 +41,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 툴바 추가
+        val actionBar = supportActionBar
+
+        actionBar!!.title = "로그인"
+
+        //actionBar.setDisplayHomeAsUpEnabled(true)
+        //actionBar.setDisplayHomeAsUpEnabled(true)
+        // 툴바 추가 완료
+
         auth = FirebaseAuth.getInstance()
         val myUid=auth.currentUser?.uid.toString()
 
@@ -50,9 +59,64 @@ class MainActivity : AppCompatActivity() {
         var auto_password : String
         use.setText(auth.currentUser?.email.toString())
         //로그인
+<<<<<<< HEAD
         find_pw.setOnClickListener {
             val intent = Intent(this, Passwd_findingActivity::class.java)
             startActivity(intent)
+=======
+        auto_login.setOnClickListener {
+            if (auto_login.isChecked() == true) {
+                Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show()
+
+                val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+                val myRef : DatabaseReference = database.getReference("member")
+                myRef.child(myUid).child("이메일").addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                    override fun onDataChange(p0: DataSnapshot) {
+                        //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
+                        val value = p0?.value
+                        auto_email="$value"
+                        autoemail.setText(auto_email)
+                    }
+                })
+                myRef.child(myUid).child("비밀번호").addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                    override fun onDataChange(p0: DataSnapshot) {
+                        //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
+                        val value = p0?.value
+                        auto_password="$value"
+                        autopassword.setText(auto_password)
+                    }
+                })
+
+                auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "signInWithEmail:success")
+                        Toast.makeText(baseContext, "로그인 성공", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, menual::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        val user = auth.currentUser
+                        updateUI(user)
+                    }else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                        Toast.makeText(baseContext, "로그인 실패", Toast.LENGTH_SHORT).show()
+
+                        updateUI(null)
+                    }
+                }
+            }
+            if (auto_login.isChecked() == false) {
+                Toast.makeText(this, "bbb", Toast.LENGTH_SHORT).show()
+
+            }
+>>>>>>> f16f8ee40bc2e188877c7631b3469b380b88c3a2
         }
         login.setOnClickListener {
 
@@ -70,6 +134,7 @@ class MainActivity : AppCompatActivity() {
                             updateUI(user)
                             val intent = Intent(this, menual::class.java)
                             startActivity(intent)
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -89,6 +154,7 @@ class MainActivity : AppCompatActivity() {
         join.setOnClickListener {
             val intent = Intent(this, join_new::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
          //   overridePendingTransition(R.anim.slide_in, R.anim.slide_out) //이건 안 먹힘???
         }
     }

@@ -16,6 +16,15 @@ class My_infoActivity : AppCompatActivity() {
 
         setContentView(R.layout.my_info)
 
+        // 툴바 추가
+        val actionBar = supportActionBar
+
+        actionBar!!.title = "내 정보"
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        // 툴바 추가 완료
+
         val database : FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef : DatabaseReference = database.getReference("member")
         myRef.child(myUid).child("나이").addValueEventListener(object : ValueEventListener {
@@ -48,11 +57,19 @@ class My_infoActivity : AppCompatActivity() {
                 nickname.text = "$value"
             }
         })
-
+/*
         back.setOnClickListener {
          //   val intent = Intent(this, menual::class.java)
          //   startActivity(intent)
             finish()
-        }
+        }*/
     }
+    override fun onSupportNavigateUp(): Boolean {
+        // return super.onSupportNavigateUp()
+        onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish()
+        return true
+    }
+
 }

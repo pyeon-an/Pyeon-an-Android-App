@@ -19,6 +19,15 @@ class Search_pc_cafeActivity : AppCompatActivity() {
 
         setContentView(R.layout.search_pc_cafe)
 
+        // 툴바 추가
+        val actionBar = supportActionBar
+
+        actionBar!!.title = "PC방 검색"
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        // 툴바 추가 완료
+
         auth = FirebaseAuth.getInstance()
         val database : FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef : DatabaseReference = database.getReference("PCcafe")
@@ -79,6 +88,7 @@ class Search_pc_cafeActivity : AppCompatActivity() {
                 memberRef.child("지점").setValue(local.text.toString())
                 Toast.makeText(this, "PC카페가 설정되었습니다.", Toast.LENGTH_SHORT).show()
                 finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             }
         }
 
@@ -91,5 +101,12 @@ class Search_pc_cafeActivity : AppCompatActivity() {
                 Toast.makeText(this, "PC카페가 즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        // return super.onSupportNavigateUp()
+        onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish()
+        return true
     }
 }

@@ -20,6 +20,15 @@ class seat2_3pop_kwangwoon_univActivity : AppCompatActivity() {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.pc_seat_info)
 
+
+        val actionBar = supportActionBar
+
+        actionBar!!.title = "3POP 광운대 2번"
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+
+
         auth = FirebaseAuth.getInstance()
         val database : FirebaseDatabase = FirebaseDatabase.getInstance()
         val myRef : DatabaseReference = database.getReference("PCcafe").child("3POP").child("광운대").child("2")
@@ -90,11 +99,11 @@ class seat2_3pop_kwangwoon_univActivity : AppCompatActivity() {
                 use.setText("$value")
             }
         })
-
+/*
         close.setOnClickListener {
             finish()
         }
-
+*/
         reservation.setOnClickListener {
             if (user == 1) {
                 myRef.child("사용").addValueEventListener(object : ValueEventListener {
@@ -110,6 +119,7 @@ class seat2_3pop_kwangwoon_univActivity : AppCompatActivity() {
                             myRef.child("uid").setValue(auth.currentUser?.uid.toString())
                             myRef.child("사용").setValue("O")
                             finish()
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
 
                             memberRef.child(auth.currentUser?.uid.toString()).child("좌석번호").setValue("2")
                             Toast.makeText(baseContext, "예약되었습니다.", Toast.LENGTH_SHORT).show()
@@ -117,13 +127,22 @@ class seat2_3pop_kwangwoon_univActivity : AppCompatActivity() {
                         } else if (check == 0) {
                             Toast.makeText(baseContext, "사용 중인 자리입니다.", Toast.LENGTH_SHORT).show()
                             finish()
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                         }
                     }
                 })
             } else {
                 Toast.makeText(baseContext, "사용중인 자리가 있습니다.", Toast.LENGTH_SHORT).show()
                 finish()
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             }
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        // return super.onSupportNavigateUp()
+        onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish()
+        return true
     }
 }

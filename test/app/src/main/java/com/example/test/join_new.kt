@@ -20,7 +20,14 @@ class join_new : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.making_new)
+        // 툴바 추가
+        val actionBar = supportActionBar
 
+        actionBar!!.title = "회원가입"
+
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        // 툴바 종료
         auth = FirebaseAuth.getInstance()
 
         //사용자가 입력한 값들
@@ -91,6 +98,7 @@ class join_new : AppCompatActivity() {
                             Toast.makeText(baseContext, "가입 완료", Toast.LENGTH_SHORT).show()
                             email_checking=1
                             finish()
+                            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                         }  else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -113,5 +121,12 @@ class join_new : AppCompatActivity() {
 
             }
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        // return super.onSupportNavigateUp()
+        onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        finish()
+        return true
     }
 }
