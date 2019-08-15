@@ -50,57 +50,9 @@ class MainActivity : AppCompatActivity() {
         var auto_password : String
         use.setText(auth.currentUser?.email.toString())
         //로그인
-        auto_login.setOnClickListener {
-            if (auto_login.isChecked() == true) {
-                Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show()
-
-                val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-                val myRef : DatabaseReference = database.getReference("member")
-                myRef.child(myUid).child("이메일").addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-                    override fun onDataChange(p0: DataSnapshot) {
-                        //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
-                        val value = p0?.value
-                        auto_email="$value"
-                        autoemail.setText(auto_email)
-                    }
-                })
-                myRef.child(myUid).child("비밀번호").addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-                    override fun onDataChange(p0: DataSnapshot) {
-                        //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
-                        val value = p0?.value
-                        auto_password="$value"
-                        autopassword.setText(auto_password)
-                    }
-                })
-
-                auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString()).addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithEmail:success")
-                        Toast.makeText(baseContext, "로그인 성공", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, menual::class.java)
-                        startActivity(intent)
-                        val user = auth.currentUser
-                        updateUI(user)
-                    }else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "로그인 실패", Toast.LENGTH_SHORT).show()
-
-                        updateUI(null)
-                    }
-                }
-            }
-            if (auto_login.isChecked() == false) {
-                Toast.makeText(this, "bbb", Toast.LENGTH_SHORT).show()
-
-            }
+        find_pw.setOnClickListener {
+            val intent = Intent(this, Passwd_findingActivity::class.java)
+            startActivity(intent)
         }
         login.setOnClickListener {
 
@@ -139,17 +91,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
          //   overridePendingTransition(R.anim.slide_in, R.anim.slide_out) //이건 안 먹힘???
         }
-
-        /*로그아웃
-        bt_logout.setOnClickListener {
-            auth.signOut()
-            //로그인 활성화 - 이걸 더 효율적으로 하는 방법이 있을것 같은데 일일히 적어 줘야 해?
-            tv_message.setText("로그인이 필요합니다..")
-            bt_logout.isEnabled = false
-            bt_login.isEnabled = true
-            bt_create.isEnabled = true
-        }*/
-
     }
 
     override fun onResume() {

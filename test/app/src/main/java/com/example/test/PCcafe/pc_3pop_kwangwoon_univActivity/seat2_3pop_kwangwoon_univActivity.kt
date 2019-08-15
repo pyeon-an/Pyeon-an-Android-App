@@ -27,6 +27,21 @@ class seat2_3pop_kwangwoon_univActivity : AppCompatActivity() {
 
         val memberRef: DatabaseReference = database.getReference("member")
         var user = 0
+
+        myRef.child("사용").addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
+                val value = p0?.value
+
+                if (value!!.equals("O")) {
+                    reservation.setEnabled(false)
+                }
+            }
+        })
         memberRef.child(auth.currentUser?.uid.toString()).child("좌석번호")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
