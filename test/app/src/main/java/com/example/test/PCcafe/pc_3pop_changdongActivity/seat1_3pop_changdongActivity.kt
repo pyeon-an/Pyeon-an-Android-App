@@ -1,6 +1,5 @@
-package com.example.test.PCcafe.pc_3pop_kwangwoon_univActivity
+package com.example.test.PCcafe.pc_3pop_changdongActivity
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
@@ -8,10 +7,10 @@ import android.widget.Toast
 import com.example.test.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.my_info.*
 import kotlinx.android.synthetic.main.pc_seat_info.*
+import kotlin.io.use
 
-class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
+class seat1_3pop_changdongActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
@@ -23,7 +22,7 @@ class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
 
         val actionBar = supportActionBar
 
-        actionBar!!.title = "3POP 광운대 1번"
+        actionBar!!.title = "3POP 창동 1번"
 
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setDisplayHomeAsUpEnabled(true)
@@ -31,7 +30,7 @@ class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-        val myRef : DatabaseReference = database.getReference("PCcafe").child("3POP").child("광운대").child("1")
+        val myRef : DatabaseReference = database.getReference("PCcafe").child("3POP").child("창동").child("1")
         var check=0
 
         val memberRef: DatabaseReference = database.getReference("member")

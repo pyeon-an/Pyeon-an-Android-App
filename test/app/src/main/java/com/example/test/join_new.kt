@@ -95,6 +95,7 @@ class join_new : AppCompatActivity() {
                             myRef.child("좌석번호").setValue("")
                             myRef.child("PCcafe").setValue("설정한 PCcafe가 없습니다.")
                             myRef.child("지점").setValue("")
+                            myRef.child("point").setValue("0")
                             Toast.makeText(baseContext, "가입 완료", Toast.LENGTH_SHORT).show()
                             email_checking=1
                             finish()

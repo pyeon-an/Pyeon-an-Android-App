@@ -9,9 +9,40 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Passwd_findingActivity">
+        <activity android:name=".PCcafe.pc_3pop_changdongActivity.seat4_3pop_changdongActivity">
         </activity>
-        <activity android:name=".Making_newActivity">
+        <activity android:name=".PCcafe.pc_3pop_changdongActivity.seat3_3pop_changdongActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_changdongActivity.seat2_3pop_changdongActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_changdongActivity.seat1_3pop_changdongActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_changdongActivity.pc_3pop_changdongActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_ntop_kwangwoon_univActivity.seat4_ntop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_ntop_kwangwoon_univActivity.seat3_ntop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_ntop_kwangwoon_univActivity.seat2_ntop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_ntop_kwangwoon_univActivity.seat1_ntop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_ntop_kwangwoon_univActivity.pc_ntop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_kwangwoon_univActivity.seat4_3pop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".PCcafe.pc_3pop_kwangwoon_univActivity.seat3_3pop_kwangwoon_univActivity">
+        </activity>
+        <activity android:name=".ChargeActivity">
+        </activity>
+
+        <service
+                android:name=".PCcafe.pc_3pop_kwangwoon_univActivity.Payment_system"
+                android:enabled="true"
+                android:exported="true">
+        </service>
+
+        <activity android:name=".Passwd_findingActivity">
         </activity>
         <activity android:name=".My_pc_listActivity">
         </activity>

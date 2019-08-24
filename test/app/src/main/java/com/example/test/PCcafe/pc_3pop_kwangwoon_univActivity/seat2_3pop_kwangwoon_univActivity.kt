@@ -1,5 +1,6 @@
 package com.example.test.PCcafe.pc_3pop_kwangwoon_univActivity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
@@ -99,12 +100,9 @@ class seat2_3pop_kwangwoon_univActivity : AppCompatActivity() {
                 use.setText("$value")
             }
         })
-/*
-        close.setOnClickListener {
-            finish()
-        }
-*/
+
         reservation.setOnClickListener {
+
             if (user == 1) {
                 myRef.child("사용").addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
@@ -116,6 +114,7 @@ class seat2_3pop_kwangwoon_univActivity : AppCompatActivity() {
                         val value = p0?.value
 
                         if (value!!.equals("X") && check == 0) {
+
                             myRef.child("uid").setValue(auth.currentUser?.uid.toString())
                             myRef.child("사용").setValue("O")
                             finish()

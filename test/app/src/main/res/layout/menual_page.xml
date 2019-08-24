@@ -18,11 +18,11 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:id="@+id/PC_cafe"
-            android:layout_marginTop="169dp"
-            app:layout_constraintEnd_toStartOf="@+id/seat" android:layout_marginBottom="170dp"
-            app:layout_constraintTop_toTopOf="@+id/info" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="232dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" app:layout_constraintEnd_toStartOf="@+id/seat"
+            android:layout_marginBottom="232dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="83dp"
-            app:layout_constraintBottom_toBottomOf="@+id/pc_logout" android:layout_marginEnd="47dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="47dp"
     />
     <Button
             android:text="자주가는\n피시방"
@@ -33,20 +33,20 @@
             app:layout_constraintTop_toTopOf="@+id/info" app:layout_constraintBottom_toBottomOf="@+id/info"
             android:layout_marginEnd="81dp"/>
     <Button
-            android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_width="99dp"
+            android:layout_height="102dp"
             android:id="@+id/logout"
             android:text="Logout"
             app:layout_constraintStart_toEndOf="@+id/pc_logout" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="62dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="61dp" app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="81dp"/>
     <Button
             android:text="내 정보"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:id="@+id/info"
-            android:layout_marginTop="230dp"
-            app:layout_constraintEnd_toStartOf="@+id/list" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="63dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" app:layout_constraintEnd_toStartOf="@+id/list"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="83dp" android:layout_marginEnd="47dp"/>
     <Button
@@ -54,16 +54,17 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:id="@+id/pc_logout"
-            app:layout_constraintBaseline_toBaselineOf="@+id/logout" app:layout_constraintEnd_toStartOf="@+id/logout"
+            app:layout_constraintEnd_toStartOf="@+id/logout" android:layout_marginBottom="62dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="80dp" android:layout_marginEnd="50dp"/>
+            android:layout_marginStart="80dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="50dp"/>
     <TextView
             android:text="PC Cafe : "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBaseline_toBaselineOf="@+id/pc_cafe" android:layout_marginStart="83dp"/>
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintBaseline_toBaselineOf="@+id/pc_cafe"/>
     <TextView
             android:text="  "
             android:layout_width="wrap_content"
@@ -80,7 +81,35 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/a" app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="91dp" android:layout_marginEnd="126dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:id="@+id/a"
+            app:layout_constraintStart_toStartOf="@+id/charge"
+            android:layout_marginStart="21dp" android:layout_marginBottom="37dp"
+            app:layout_constraintBottom_toTopOf="@+id/charge"/>
+    <TextView
+            android:text="Point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="83dp" app:layout_constraintBaseline_toBaselineOf="@+id/point"
+            app:layout_constraintEnd_toStartOf="@+id/point" android:layout_marginEnd="38dp"
+    />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/point"
+            android:layout_marginTop="37dp"
+            app:layout_constraintTop_toBottomOf="@+id/pc_cafe" app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/charge" android:layout_marginEnd="109dp"
+    />
+    <Button
+            android:text="충전"
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:id="@+id/charge"
+            android:layout_marginTop="147dp"
+            app:layout_constraintStart_toEndOf="@+id/point" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="146dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/list" android:layout_marginEnd="82dp"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>
