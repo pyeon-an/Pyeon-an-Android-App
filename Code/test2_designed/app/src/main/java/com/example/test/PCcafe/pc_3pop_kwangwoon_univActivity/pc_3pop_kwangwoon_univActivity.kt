@@ -34,10 +34,6 @@ class pc_3pop_kwangwoon_univActivity : AppCompatActivity() {
         val myRef2 : DatabaseReference = database.getReference("PCcafe").child("3POP").child("광운대").child("2")
         val myRef3 : DatabaseReference = database.getReference("PCcafe").child("3POP").child("광운대").child("3")
         val myRef4 : DatabaseReference = database.getReference("PCcafe").child("3POP").child("광운대").child("4")
-        var check=0
-
-        val memberRef: DatabaseReference = database.getReference("member")
-        var user = 0
 
         myRef1.child("using").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {

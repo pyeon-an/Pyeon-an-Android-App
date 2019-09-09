@@ -88,7 +88,7 @@
             android:layout_marginBottom="381dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="331dp"/>
     <Button
-            android:text="찾기"
+            android:text="검색"
             android:background="@drawable/rounded"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
