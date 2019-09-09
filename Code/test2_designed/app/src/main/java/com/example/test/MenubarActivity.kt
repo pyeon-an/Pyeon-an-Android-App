@@ -2,6 +2,7 @@ package com.example.test
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.menubar.charge
 import kotlinx.android.synthetic.main.menubar.local
 import kotlinx.android.synthetic.main.menubar.pc_cafe
 import kotlinx.android.synthetic.main.menubar.point
-import kotlinx.android.synthetic.main.my_info.*
+
 
 class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,7 +36,6 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     var pc_check=10000
     val database : FirebaseDatabase = FirebaseDatabase.getInstance()
     val myRef : DatabaseReference = database.getReference("member")
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +97,9 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
+
+
+
     }
 
     override fun onBackPressed() {
@@ -133,10 +136,17 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+
+      when (item.itemId) {
+            R.id.action_creator -> {
+                val intent = Intent(this, CreatorActivity::class.java)
+                super.startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                return true
+            }
+                else -> super.onOptionsItemSelected(item)
         }
+        return true
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -221,6 +231,7 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
             }
+
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)

@@ -6,7 +6,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_creator">제작자</string>
 
     <string name="menu_myinfo">내정보</string>
     <string name="menu_searchPC">PC방 찾기</string>
@@ -17,7 +17,8 @@
     <string name="title_activity_menubar">홈</string>
     <string name="btn_register">아이디가 없으신가요?</string>
     <string name="btn_forgotpassword">비밀번호 찾기</string>
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_fullscreen">제작자</string>
+    <string name="dummy_content">편--안</string>
+
+    <string name="title_activity_creator">CreatorActivity</string>
 </resources>

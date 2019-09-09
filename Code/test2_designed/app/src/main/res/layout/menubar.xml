@@ -12,7 +12,7 @@
     <include
             layout="@layout/app_bar_menubar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" app:statusBarBackground="#FFFFFF" android:background="#00EBE2E2"/>
+            android:layout_height="match_parent"  android:background="#00EBE2E2"/>
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"

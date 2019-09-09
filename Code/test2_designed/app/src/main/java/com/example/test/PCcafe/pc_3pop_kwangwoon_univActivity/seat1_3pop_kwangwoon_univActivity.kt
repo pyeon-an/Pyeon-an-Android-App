@@ -1,6 +1,7 @@
 package com.example.test.PCcafe.pc_3pop_kwangwoon_univActivity
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
@@ -8,7 +9,7 @@ import android.widget.Toast
 import com.example.test.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.my_info.*
+import kotlinx.android.synthetic.main.pc_3pop_kwangwoon_univ.*
 import kotlinx.android.synthetic.main.pc_seat_info.*
 import java.time.LocalDateTime
 
@@ -48,7 +49,7 @@ class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
                 val value = p0?.value
 
                 if (value!!.equals("O")) {
-                    reservation.setEnabled(false)
+                   reservation.setEnabled(false)
                 }
             }
         })
@@ -143,6 +144,7 @@ class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
                         if (value!!.equals("X") && check == 0 && user == 1) {
                             myRef.child("uid").setValue(auth.currentUser?.uid.toString())
                             myRef.child("using").setValue("O")
+                           // seat1.setBackgroundColor(Color.LTGRAY)
                             memberRef.child(auth.currentUser?.uid.toString()).child("seat_using").setValue("1")
                             Toast.makeText(baseContext, "예약되었습니다", Toast.LENGTH_SHORT).show()
                             check = 1
