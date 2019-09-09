@@ -10,6 +10,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.pc_3pop_kwangwoon_univ.*
 import kotlinx.android.synthetic.main.pc_seat_info.*
 
+
 class pc_3pop_kwangwoon_univActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -49,7 +50,7 @@ class pc_3pop_kwangwoon_univActivity : AppCompatActivity() {
 
                 if (value!!.equals("O")) {
                     seat1.setBackgroundResource(R.drawable.seat_rounded)
-                    //seat1.setEnabled(false)
+                    //reservation.setEnabled(false)
                 }
             }
         })

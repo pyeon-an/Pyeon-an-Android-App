@@ -195,7 +195,7 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 val pcRef: DatabaseReference =
                     database.getReference("PCcafe").child(pc_cafe.text.toString()).child(local.text.toString())
 
-                myRef.child(myUid).child("좌석번호").addValueEventListener(object : ValueEventListener {
+                myRef.child(myUid).child("seat_using").addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
                     }
 
@@ -203,9 +203,10 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                         //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
                         val value = p0?.value
                         if (pc_check == 10000) {
-                            pcRef.child("$value").child("사용").setValue("X")
+                            pcRef.child("$value").child("using").setValue("X")
                             pcRef.child("$value").child("uid").setValue("")
-                            myRef.child(myUid).child("좌석번호").setValue("")
+                            pcRef.child("$value").child("time_start").setValue("")
+                            myRef.child(myUid).child("seat_using").setValue("")
                             Toast.makeText(baseContext, "PC 로그아웃", Toast.LENGTH_SHORT).show()
                             pc_check = 0
                         } else {
@@ -216,9 +217,10 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                     }
                 })
                 if (pc_check != 10000 && pc_check != 0) {
-                    pcRef.child(pc_check.toString()).child("사용").setValue("X")
+                    pcRef.child(pc_check.toString()).child("using").setValue("X")
                     pcRef.child(pc_check.toString()).child("uid").setValue("")
-                    myRef.child(myUid).child("좌석번호").setValue("")
+                    pcRef.child(pc_check.toString()).child("time_start").setValue("")
+                    myRef.child(myUid).child("seat_using").setValue("")
                     Toast.makeText(baseContext, "pc 로그아웃", Toast.LENGTH_SHORT).show()
                 }
 
