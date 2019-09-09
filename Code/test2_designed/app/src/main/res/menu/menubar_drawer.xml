@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_myinfo"
+                android:icon="@drawable/ic_menu_info"
+                android:title="@string/menu_myinfo"/>
+        <item
+                android:id="@+id/nav_searchPC"
+                android:icon="@drawable/ic_menu_search"
+                android:title="@string/menu_searchPC"/>
+        <item
+                android:id="@+id/nav_favorite"
+                android:icon="@drawable/ic_menu_fav"
+                android:title= "@string/menu_favortie"/>
+        <item
+                android:id="@+id/nav_seat"
+                android:icon="@drawable/ic_menu_seat"
+                android:title="@string/menu_seat"/>
+    </group>
+
+    <item android:title="나가기">
+        <menu>
+            <item
+                    android:id="@+id/nav_offPC"
+                    android:icon="@drawable/ic_menu_off"
+                    android:title="@string/menu_offPC"/>
+            <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_menu_logout"
+                    android:title="@string/menu_LogOut"/>
+        </menu>
+    </item>
+
+</menu>
