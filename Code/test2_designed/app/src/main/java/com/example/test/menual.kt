@@ -77,7 +77,6 @@ class menual : AppCompatActivity() {
         })
         myRef.child(myUid).child("local").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-
             }
             override fun onDataChange(p0: DataSnapshot) {
                 //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다

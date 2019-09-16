@@ -7,6 +7,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.charge.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class ChargeActivity : AppCompatActivity() {
 
@@ -43,6 +45,14 @@ class ChargeActivity : AppCompatActivity() {
                     point.setText("0")
                 }
             })
+
+            val current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            val formatted = current.format(formatter)
+            val logRef : DatabaseReference = database.getReference("log").child(formatted.toString()).child(auth.currentUser?.uid.toString())
+
+            logRef.setValue(point.text.toString().toInt().toString() + "  point")
+
             Toast.makeText(this, "포인트가 충전되었습니다", Toast.LENGTH_SHORT).show()
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)

@@ -71,12 +71,7 @@ class My_infoActivity : AppCompatActivity() {
                 phone.text = "$value"
             }
         })
-/*
-        back.setOnClickListener {
-         //   val intent = Intent(this, menual::class.java)
-         //   startActivity(intent)
-            finish()
-        }*/
+
     }
     override fun onSupportNavigateUp(): Boolean {
         // return super.onSupportNavigateUp()

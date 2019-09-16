@@ -77,10 +77,10 @@ class Search_pc_cafeActivity : AppCompatActivity() {
 
         select.setOnClickListener {
             if(pc_cafe.text.toString().equals("") || local.text.toString().equals("")){
-                Toast.makeText(this, "PC카페를 찾아주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "PC카페를 찾아주세요", Toast.LENGTH_SHORT).show()
 
             } else if(check==0){
-                Toast.makeText(this, "PC카페를 먼저 찾아주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "PC카페를 먼저 찾아주세요", Toast.LENGTH_SHORT).show()
 
             } else {
                 val memberRef = database.getReference("member").child(auth.currentUser?.uid.toString())
@@ -94,11 +94,11 @@ class Search_pc_cafeActivity : AppCompatActivity() {
 
         list.setOnClickListener {
             if(check!=1){
-                Toast.makeText(this, "PC카페를 먼저 설정해주세요.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "PC카페를 먼저 설정해주세요", Toast.LENGTH_SHORT).show()
             } else{
                 val memberRef = database.getReference("member").child(auth.currentUser?.uid.toString())
                 memberRef.child("favorite").child(pc_cafe.text.toString()+" "+local.text.toString()).setValue(pc_cafe.text.toString()+" "+local.text.toString())
-                Toast.makeText(this, "PC카페가 즐겨찾기에 추가되었습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "PC카페가 즐겨찾기에 추가되었습니다", Toast.LENGTH_SHORT).show()
             }
         }
     }

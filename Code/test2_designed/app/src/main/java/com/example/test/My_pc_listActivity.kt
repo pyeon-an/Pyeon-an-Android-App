@@ -25,7 +25,7 @@ class My_pc_listActivity : AppCompatActivity() {
     }
 
     var adapter : ArrayAdapter<String>? = null
-
+    var pccafe : String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.my_pc_list)
@@ -44,6 +44,7 @@ class My_pc_listActivity : AppCompatActivity() {
 
         val memberRef = database.getReference("member").child(auth.currentUser?.uid.toString()).child("favorite")
         // Data 추가
+
         memberRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
@@ -63,19 +64,40 @@ class My_pc_listActivity : AppCompatActivity() {
         })
 
         // 간단한 adpater생성
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, dataList)
+        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, dataList)
         // adpater 설정
         lstMain.adapter = adapter
         // Item 클릭 이벤트핸들러 설정
         lstMain.setOnItemClickListener { parent, view, position, id ->
+            /*        val myRef = database.getReference("member").child(auth.currentUser?.uid.toString())
+                    // 삭제하기
+                    myRef.child("local").setValue(dataList.get(position).toString().substringAfter(" "))
+                    myRef.child("PCcafe").setValue(dataList.get(position).toString().substringBefore(" "))
+                    adapter?.notifyDataSetChanged()
+                    Toast.makeText(applicationContext, "PC cafe가 설정되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()*/
+            pccafe=dataList.get(position).toString()
+            Toast.makeText(applicationContext, pccafe.toString(), Toast.LENGTH_SHORT).show()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
+
+        select.setOnClickListener {
             val myRef = database.getReference("member").child(auth.currentUser?.uid.toString())
             // 삭제하기
-            myRef.child("local").setValue(dataList.get(position).toString().substringAfter(" "))
-            myRef.child("PCcafe").setValue(dataList.get(position).toString().substringBefore(" "))
+            myRef.child("local").setValue(pccafe!!.toString().substringAfter(" "))
+            myRef.child("PCcafe").setValue(pccafe!!.toString().substringBefore(" "))
             adapter?.notifyDataSetChanged()
             Toast.makeText(applicationContext, "PC cafe가 설정되었습니다", Toast.LENGTH_SHORT).show()
             finish()
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
+
+        delete.setOnClickListener {
+            val myRef = database.getReference("member").child(auth.currentUser?.uid.toString()).child("favorite")
+            // 삭제하기
+            myRef.child(pccafe!!.toString()).removeValue()
+            adapter?.notifyDataSetChanged()
+            Toast.makeText(applicationContext, "PC cafe가 삭제되었습니다", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
     }
