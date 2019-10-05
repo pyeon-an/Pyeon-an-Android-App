@@ -18,7 +18,6 @@
     <string name="btn_register">아이디가 없으신가요?</string>
     <string name="btn_forgotpassword">비밀번호 찾기</string>
     <string name="title_activity_fullscreen">제작자</string>
-    <string name="dummy_content">편--안</string>
-
+    <string name="dummy_content">편--안\n남윤창\n홍진혁\n김민철\n정용훈\n오윤제</string>
     <string name="title_activity_creator">CreatorActivity</string>
 </resources>

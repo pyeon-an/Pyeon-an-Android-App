@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="#0099cc"
@@ -9,30 +9,32 @@
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
     <TextView android:id="@+id/fullscreen_content"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:keepScreenOn="true"
               android:textColor="#33b5e5"
               android:textStyle="bold"
-              android:textSize="50sp"
+              android:textSize="36sp"
               android:gravity="center"
-              android:text="@string/dummy_content"/>
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:fitsSystemWindows="true">
+              android:text="@string/dummy_content" app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent"
+                                                       android:fitsSystemWindows="true" android:id="@+id/frameLayout">
 
         <LinearLayout android:id="@+id/fullscreen_content_controls"
                       style="?metaButtonBarStyle"
-                      android:layout_width="match_parent"
+                      android:layout_width="0dp"
                       android:layout_height="wrap_content"
-                      android:layout_gravity="bottom|center_horizontal"
                       android:background="@color/black_overlay"
                       android:orientation="horizontal"
-                      tools:ignore="UselessParent"/>
-    </FrameLayout>
+                      tools:ignore="UselessParent"
+                      app:layout_constraintTop_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
