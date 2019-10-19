@@ -2,9 +2,6 @@ package com.example.test
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -13,19 +10,19 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Toast
 import com.example.test.PCcafe.pc_3pop_changdongActivity.pc_3pop_changdongActivity
 import com.example.test.PCcafe.pc_3pop_kwangwoon_univActivity.pc_3pop_kwangwoon_univActivity
 import com.example.test.PCcafe.pc_ntop_kwangwoon_univActivity.pc_ntop_kwangwoon_univActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.menual_page.*
-import kotlinx.android.synthetic.main.menubar.*
+import kotlinx.android.synthetic.main.app_bar_menubar.*
 import kotlinx.android.synthetic.main.menubar.charge
 import kotlinx.android.synthetic.main.menubar.local
 import kotlinx.android.synthetic.main.menubar.pc_cafe
 import kotlinx.android.synthetic.main.menubar.point
-
 
 class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,22 +34,24 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     val database : FirebaseDatabase = FirebaseDatabase.getInstance()
     val myRef : DatabaseReference = database.getReference("member")
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.menubar)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
+        setUpUI()
         val actionBar = supportActionBar
 
         actionBar!!.title = "홈"
+
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
+
+
         if(myUid.equals("null")){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -101,11 +100,31 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
-
-
-
     }
 
+    private fun setUpUI() {
+
+        // webview client 객체를 넘긴다.
+        //wbMain.setWebViewClient(WebClient())
+        webview.webViewClient = WebClient()
+
+        // 브라우저 세팅을 가져온다.
+        val set = webview.getSettings()
+        // 자바스크립트를 실행가능하게
+        set.setJavaScriptEnabled(true)
+        // 줌인아웃을 불가능하게
+        set.setBuiltInZoomControls(false)
+
+            webview.loadUrl("http://www.zdnet.co.kr/    ")
+    }
+
+    internal inner class WebClient : WebViewClient() {
+        // URL을 요청했다면...
+        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+            view.loadUrl(url)
+            return true
+        }
+    }
     override fun onBackPressed() {
         val time1 = System.currentTimeMillis()
         val time2 = time1 - time3
