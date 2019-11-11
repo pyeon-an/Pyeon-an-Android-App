@@ -1,5 +1,6 @@
 package com.example.test.PCcafe.pc_3pop_changdongActivity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
@@ -36,7 +37,6 @@ class seat2_3pop_changdongActivity : AppCompatActivity() {
 
         val memberRef: DatabaseReference = database.getReference("member")
         var user = 0
-        var point = 0
 
         myRef.child("using").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -68,21 +68,6 @@ class seat2_3pop_changdongActivity : AppCompatActivity() {
                     }
                 }
             })
-
-        memberRef.child(auth.currentUser?.uid.toString()).child("point").addValueEventListener(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-
-            }
-            override fun onDataChange(p0: DataSnapshot) {
-                val value = p0?.value
-
-                if(value.toString().toInt()<500){
-                    point = 1
-                } else{
-                    point = 0
-                }
-            }
-        })
 
         myRef.child("cpu").addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -142,9 +127,10 @@ class seat2_3pop_changdongActivity : AppCompatActivity() {
         }
 */
         reservation.setOnClickListener {
+            val intent = Intent(this, Payment_system_3pop_changdong::class.java)
             val dateAndtime: LocalDateTime = LocalDateTime.now()
             myRef.child("time_start").setValue(dateAndtime.toString())
-            if (user == 1 && point == 0) {
+            if (user == 1) {
                 myRef.child("using").addValueEventListener(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError) {
 
@@ -160,6 +146,7 @@ class seat2_3pop_changdongActivity : AppCompatActivity() {
                             memberRef.child(auth.currentUser?.uid.toString()).child("seat_using").setValue("2")
                             Toast.makeText(baseContext, "예약되었습니다", Toast.LENGTH_SHORT).show()
                             check = 1
+                            startService(intent)
                             finish()
                             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                         } else if (check == 0) {
@@ -169,13 +156,7 @@ class seat2_3pop_changdongActivity : AppCompatActivity() {
                         }
                     }
                 })
-            }
-            else if(point == 1) {
-                Toast.makeText(baseContext, "point가 부족합니다", Toast.LENGTH_SHORT).show()
-                finish()
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-            }
-            else {
+            } else {
                 Toast.makeText(baseContext, "사용중인 자리가 있습니다", Toast.LENGTH_SHORT).show()
                 finish()
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)

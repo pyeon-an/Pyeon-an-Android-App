@@ -2,6 +2,9 @@ package com.example.test
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
@@ -10,19 +13,24 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.Toast
 import com.example.test.PCcafe.pc_3pop_changdongActivity.pc_3pop_changdongActivity
+import com.example.test.PCcafe.pc_3pop_kwangwoon_univActivity.Payment_system_3pop_kwangwoon_univ
+import com.example.test.PCcafe.pc_3pop_changdongActivity.Payment_system_3pop_changdong
+import com.example.test.PCcafe.pc_ntop_kwangwoon_univActivity.Payment_system_ntop_kwangwoon_univ
 import com.example.test.PCcafe.pc_3pop_kwangwoon_univActivity.pc_3pop_kwangwoon_univActivity
 import com.example.test.PCcafe.pc_ntop_kwangwoon_univActivity.pc_ntop_kwangwoon_univActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.app_bar_menubar.*
 import kotlinx.android.synthetic.main.menubar.charge
 import kotlinx.android.synthetic.main.menubar.local
 import kotlinx.android.synthetic.main.menubar.pc_cafe
 import kotlinx.android.synthetic.main.menubar.point
+import android.webkit.WebView
+import android.webkit.WebViewClient
+
+import kotlinx.android.synthetic.main.app_bar_menubar.*
+
 
 class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,6 +42,7 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     val database : FirebaseDatabase = FirebaseDatabase.getInstance()
     val myRef : DatabaseReference = database.getReference("member")
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.menubar)
@@ -41,17 +50,13 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         setSupportActionBar(toolbar)
         setUpUI()
         val actionBar = supportActionBar
-
         actionBar!!.title = "홈"
-
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
-
-
         if(myUid.equals("null")){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -100,6 +105,9 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
+
+
+
     }
 
     private fun setUpUI() {
@@ -115,7 +123,7 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         // 줌인아웃을 불가능하게
         set.setBuiltInZoomControls(false)
 
-            webview.loadUrl("http://www.zdnet.co.kr/    ")
+        webview.loadUrl("http://www.zdnet.co.kr/    ")
     }
 
     internal inner class WebClient : WebViewClient() {
@@ -125,13 +133,14 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             return true
         }
     }
+
     override fun onBackPressed() {
         val time1 = System.currentTimeMillis()
         val time2 = time1 - time3
         if (time2 in 0..2000) {
             finishAffinity()
-            System.runFinalization()
-            System.exit(0)
+            //  System.runFinalization()
+            //  System.exit(0)
         }
         else {
             time3 = time1
@@ -160,14 +169,14 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-      when (item.itemId) {
+        when (item.itemId) {
             R.id.action_creator -> {
                 val intent = Intent(this, CreatorActivity::class.java)
                 super.startActivity(intent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 return true
             }
-                else -> super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
         return true
     }
@@ -215,6 +224,26 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
             R.id.nav_offPC -> {
                 System.runFinalization()
+                if(pc_cafe.text.toString().equals("3POP")) {
+                    if(local.text.toString().equals("광운대")) {
+                        val intent = Intent(this, Payment_system_3pop_kwangwoon_univ::class.java)
+                        stopService(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    } else if(local.text.toString().equals("창동")) {
+                        val intent = Intent(this, Payment_system_3pop_changdong::class.java)
+                        stopService(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    }
+                } else if(pc_cafe.text.toString().equals("NTop")) {
+                    if(local.text.toString().equals("광운대")) {
+                        val intent = Intent(this, Payment_system_ntop_kwangwoon_univ::class.java)
+                        stopService(intent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
+                    }
+                } else{
+                    Toast.makeText(baseContext, "PC cafe를 먼저 설정해주세요", Toast.LENGTH_SHORT).show()
+                }
                 val pcRef: DatabaseReference =
                     database.getReference("PCcafe").child(pc_cafe.text.toString()).child(local.text.toString())
 

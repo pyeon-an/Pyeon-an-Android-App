@@ -101,22 +101,22 @@ class pc_3pop_kwangwoon_univActivity : AppCompatActivity() {
                 }
             }
         })
-       /* memberRef.child(auth.currentUser?.uid.toString()).child("seat_using")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
+        /* memberRef.child(auth.currentUser?.uid.toString()).child("seat_using")
+             .addValueEventListener(object : ValueEventListener {
+                 override fun onCancelled(p0: DatabaseError) {
 
-                }
+                 }
 
-                override fun onDataChange(p0: DataSnapshot) {
-                    val value = p0?.value
-                    if ("$value".equals("") == true) {
-                        user = 1
-                    } else {
-                        user = 0
-                    }
-                }
-            })
-*/
+                 override fun onDataChange(p0: DataSnapshot) {
+                     val value = p0?.value
+                     if ("$value".equals("") == true) {
+                         user = 1
+                     } else {
+                         user = 0
+                     }
+                 }
+             })
+ */
         seat1.setOnClickListener {
             val intent = Intent(this, seat1_3pop_kwangwoon_univActivity::class.java)
             startActivity(intent)
