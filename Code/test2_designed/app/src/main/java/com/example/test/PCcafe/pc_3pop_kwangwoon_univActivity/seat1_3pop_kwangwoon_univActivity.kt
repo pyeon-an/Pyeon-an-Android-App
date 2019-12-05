@@ -169,6 +169,7 @@ class seat1_3pop_kwangwoon_univActivity : AppCompatActivity() {
                             Toast.makeText(baseContext, "예약되었습니다", Toast.LENGTH_SHORT).show()
                             check = 1
                             startService(intent)
+                            reservation.setEnabled(false)
                             finish()
                             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
                         } else if (check == 0) {

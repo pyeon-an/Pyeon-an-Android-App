@@ -156,6 +156,7 @@ class seat3_3pop_kwangwoon_univActivity : AppCompatActivity() {
 
                             myRef.child("uid").setValue(auth.currentUser?.uid.toString())
                             myRef.child("using").setValue("O")
+                            reservation.setEnabled(false)
                             startService(intent)
                             finish()
                             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)

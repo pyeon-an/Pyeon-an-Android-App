@@ -12,7 +12,7 @@
     <include
             layout="@layout/app_bar_menubar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"  android:background="#00EBE2E2"/>
+            android:layout_height="match_parent" android:background="#00EBE2E2"/>
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
@@ -27,28 +27,31 @@
                 android:layout_height="match_parent">
 
             <ImageButton
-                    android:layout_width="26dp"
-                    android:layout_height="26dp" app:srcCompat="@drawable/ic_menu_add"
+                    android:layout_width="37dp"
+                    android:layout_height="33dp" app:srcCompat="@drawable/ic_menu_add"
                     android:id="@+id/charge"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="157dp" app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="41dp"/>
+                    app:layout_constraintStart_toEndOf="@+id/local"
+                    android:layout_marginStart="48dp" app:layout_constraintEnd_toStartOf="@+id/charge_text"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/point" app:layout_constraintHorizontal_bias="1.0"/>
             <TextView
                     android:text="PC Cafe : "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintHorizontal_weight="1"
                     android:id="@+id/showPCCafe"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="76dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/showPoint" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="16dp"/>
             <TextView
                     android:text="  "
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintHorizontal_weight="1"
                     android:id="@+id/pc_cafe"
                     app:layout_constraintStart_toEndOf="@+id/showPCCafe"
-                    android:layout_marginBottom="76dp"
-                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"/>
+                    android:layout_marginStart="8dp" app:layout_constraintBottom_toTopOf="@+id/point"
+                    android:layout_marginBottom="8dp"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -60,9 +63,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/showPoint"
-                    android:layout_marginBottom="48dp"
-                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="16dp"/>
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp" app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="48dp"/>
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -70,6 +74,13 @@
                     app:layout_constraintStart_toEndOf="@+id/showPoint"
                     android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="48dp"/>
+            <TextView
+                    android:text="충전"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/charge_text"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="@+id/charge"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.navigation.NavigationView>
 

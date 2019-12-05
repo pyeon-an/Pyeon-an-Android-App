@@ -9,6 +9,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.test.MenubarActivity
@@ -26,6 +27,8 @@ class Payment_system_3pop_kwangwoon_univ : Service() {
     var check=0
     var point=0
     var cur_point=0
+    var pc_check=10000
+    var use_point=0
 
     override fun onBind(intent: Intent): IBinder {
         TODO("Return the communication channel to the service.")
@@ -49,7 +52,7 @@ class Payment_system_3pop_kwangwoon_univ : Service() {
         auth = FirebaseAuth.getInstance()
         var myUid=auth.currentUser?.uid.toString()
         val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-        val myRef : DatabaseReference = database.getReference("PCcafe").child("3POP").child("광운대").child("요금제").child("6")
+        val myRef : DatabaseReference = database.getReference("member")
         val memberRef : DatabaseReference = database.getReference("member").child(myUid).child("point")
         if(point==0) {
             memberRef.addValueEventListener(object : ValueEventListener {
@@ -73,13 +76,45 @@ class Payment_system_3pop_kwangwoon_univ : Service() {
                         //        check = 1
                     } else if(check==1) {
                         timerTask = timer(period = 2000) {
-                            if (point <= 0) {
+                            if (point <= 1) {
+                                val pcRef: DatabaseReference =
+                                    database.getReference("PCcafe").child("3POP").child("광운대")
+
+                                myRef.child(myUid).child("seat_using").addValueEventListener(object : ValueEventListener {
+                                    override fun onCancelled(p0: DatabaseError) {
+                                    }
+
+                                    override fun onDataChange(p0: DataSnapshot) {
+                                        //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
+                                        val value = p0?.value
+                                        if (pc_check == 10000) {
+                                            pcRef.child("$value").child("using").setValue("X")
+                                            pcRef.child("$value").child("uid").setValue("")
+                                            pcRef.child("$value").child("time_start").setValue("")
+                                            myRef.child(myUid).child("seat_using").setValue("")
+                                            Toast.makeText(baseContext, "PC 로그아웃", Toast.LENGTH_SHORT).show()
+                                            pc_check = 0
+                                        } else {
+                                            if ("$value".equals("") == false) {
+                                                pc_check = value.toString().toInt()
+                                            }
+                                        }
+                                    }
+                                })
+                                if (pc_check != 10000 && pc_check != 0) {
+                                    pcRef.child(pc_check.toString()).child("using").setValue("X")
+                                    pcRef.child(pc_check.toString()).child("uid").setValue("")
+                                    pcRef.child(pc_check.toString()).child("time_start").setValue("")
+                                    myRef.child(myUid).child("seat_using").setValue("")
+                                    Toast.makeText(baseContext, "pc 로그아웃", Toast.LENGTH_SHORT).show()
+                                }
                                 stopSelf()
                                 timerTask!!.cancel()
                             } else {
                                 cur_point = point
                                 point = cur_point - 1
                                 memberRef.setValue(point.toString())
+                                use_point=use_point+1
                             }
                         }
                         check = 0
@@ -90,31 +125,31 @@ class Payment_system_3pop_kwangwoon_univ : Service() {
 
 
         // Toast.makeText(baseContext, time1.toString(), Toast.LENGTH_SHORT).show()
-        return START_REDELIVER_INTENT
+        return START_NOT_STICKY
     }
 
     override fun onDestroy() {
         //TODO : 서비스 종료시 할 것들
         super.onDestroy()
+        auth = FirebaseAuth.getInstance()
 
-        /*     val intent = Intent(this, Payment_system::class.java)
-             stopService(intent)
-             auth = FirebaseAuth.getInstance()
-             var myUid=auth.currentUser?.uid.toString()
-             val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-             val memberRef : DatabaseReference = database.getReference("member").child(myUid).child("point")
+        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myRef : DatabaseReference = database.getReference("owner").child("3POP광운대").child("income")
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
 
+            }
 
-                 timerTask = timer(period = 2000) {
-                     if (point <= 0) {
-                         stopSelf()
-                         timerTask!!.cancel()
-                     } else {
-                         cur_point = point
-                         point = cur_point - 1
-                         memberRef.setValue(point.toString())
-                     }
-                 }*/
+            override fun onDataChange(p0: DataSnapshot) {
+                //값이 변경된게 있으면 database의 값이 갱신되면 자동 호출된다
+                val value = p0?.value
+                var sum=value.toString().toInt()+use_point.toInt()
+                if(use_point!=0){
+                    myRef.setValue(sum)
+                }
+                use_point=0
+            }
+        })
         //   removeNotification()
         timerTask!!.cancel()
     }
@@ -126,11 +161,12 @@ class Payment_system_3pop_kwangwoon_univ : Service() {
                 PendingIntent.getActivity(this, 0, notificationIntent, 0)
             }
         //builder.setSmallIcon(android.R.mipmap.ic_launcher)
-        builder.setSmallIcon(R.mipmap.ic_launcher)
+        //builder.setSmallIcon(R.mipmap.ic_launcher)
+        builder.setSmallIcon(R.mipmap.ic_launcher_py_round)
         builder.setContentTitle("P--Y")
-        builder.setContentText("point")
+        builder.setContentText("PC cafe : 3POP(광운대)")
         builder.setContentIntent(pendingIntent)
-        builder.color = Color.RED
+       // builder.color = Color.BLUE
         // 사용자가 탭을 클릭하면 자동 제거
         builder.setAutoCancel(true)
         startForeground(1,builder.build())

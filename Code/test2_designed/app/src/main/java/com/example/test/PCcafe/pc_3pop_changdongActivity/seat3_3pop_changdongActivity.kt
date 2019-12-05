@@ -164,6 +164,7 @@ class seat3_3pop_changdongActivity : AppCompatActivity() {
                             memberRef.child(auth.currentUser?.uid.toString()).child("seat_using").setValue("3")
                             Toast.makeText(baseContext, "예약되었습니다", Toast.LENGTH_SHORT).show()
                             check = 1
+                            reservation.setEnabled(false)
                             startService(intent)
                             finish()
                             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)

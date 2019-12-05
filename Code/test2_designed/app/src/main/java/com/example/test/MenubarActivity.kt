@@ -122,8 +122,8 @@ class MenubarActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         set.setJavaScriptEnabled(true)
         // 줌인아웃을 불가능하게
         set.setBuiltInZoomControls(false)
-
-        webview.loadUrl("http://www.zdnet.co.kr/    ")
+        webview.loadUrl("https://sites.google.com/view/icseclab   ")
+       // webview.loadUrl("http://www.zdnet.co.kr/    ")
     }
 
     internal inner class WebClient : WebViewClient() {

@@ -168,6 +168,7 @@ class seat1_3pop_changdongActivity : AppCompatActivity() {
                             myRef.child("using").setValue("O")
                             memberRef.child(auth.currentUser?.uid.toString()).child("seat_using").setValue("1")
                             Toast.makeText(baseContext, "예약되었습니다", Toast.LENGTH_SHORT).show()
+                            reservation.setEnabled(false)
                             startService(intent)
                             check = 1
                             finish()

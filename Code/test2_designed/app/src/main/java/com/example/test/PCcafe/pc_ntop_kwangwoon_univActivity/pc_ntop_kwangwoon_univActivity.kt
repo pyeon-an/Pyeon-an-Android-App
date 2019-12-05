@@ -49,6 +49,11 @@ class pc_ntop_kwangwoon_univActivity : AppCompatActivity() {
                     seat1.setBackgroundResource(R.drawable.seat_rounded)
                     //reservation.setEnabled(false)
                 }
+                else if (value!!.equals("X")) {
+
+                    seat1.setBackgroundResource(R.drawable.rounded)
+                    //seat1.setEnabled(false)
+                }
             }
         })
 
@@ -64,6 +69,11 @@ class pc_ntop_kwangwoon_univActivity : AppCompatActivity() {
                 if (value!!.equals("O")) {
 
                     seat2.setBackgroundResource(R.drawable.seat_rounded)
+                    //seat1.setEnabled(false)
+                }
+                else if (value!!.equals("X")) {
+
+                    seat2.setBackgroundResource(R.drawable.rounded)
                     //seat1.setEnabled(false)
                 }
             }
@@ -83,6 +93,11 @@ class pc_ntop_kwangwoon_univActivity : AppCompatActivity() {
                     seat3.setBackgroundResource(R.drawable.seat_rounded)
                     //seat1.setEnabled(false)
                 }
+                else if (value!!.equals("X")) {
+
+                    seat3.setBackgroundResource(R.drawable.rounded)
+                    //seat1.setEnabled(false)
+                }
             }
         })
 
@@ -98,6 +113,11 @@ class pc_ntop_kwangwoon_univActivity : AppCompatActivity() {
                 if (value!!.equals("O")) {
 
                     seat4.setBackgroundResource(R.drawable.seat_rounded)
+                    //seat1.setEnabled(false)
+                }
+                else if (value!!.equals("X")) {
+
+                    seat4.setBackgroundResource(R.drawable.rounded)
                     //seat1.setEnabled(false)
                 }
             }

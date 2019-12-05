@@ -8,9 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.join
 import kotlinx.android.synthetic.main.making_new.*
 
@@ -36,7 +34,7 @@ class join_new : AppCompatActivity() {
 //        var password: String = et_password.text.toString()
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.passwd)
-        val password_check = findViewById<EditText>(R.id.passwd_check)
+        val password_check = findViewById<EditText>(R.id.pc_cafe)
         val age = findViewById<EditText>(R.id.age)
         val nickname=findViewById<EditText>(R.id.nickname)
         val phone=findViewById<EditText>(R.id.phone)
@@ -54,7 +52,7 @@ class join_new : AppCompatActivity() {
 
         card1.startAnimation(email_ttb)
         card2.startAnimation(passwd_ttb)
-        card3.startAnimation(passwd2_ttb)
+        pc_card.startAnimation(passwd2_ttb)
         card4.startAnimation(date_ttb)
         card5.startAnimation(nickname_ttb)
         card6.startAnimation(phone_ttb)
